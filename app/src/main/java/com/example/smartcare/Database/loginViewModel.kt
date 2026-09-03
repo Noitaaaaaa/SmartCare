@@ -14,9 +14,29 @@ class loginViewModel(application: Application): AndroidViewModel(application){
     var loginError by mutableStateOf<String?>(null)
         private set
 
-    fun login(onSuccess: (userInfo: UserInfo) -> Unit){
+    fun onEmailChange(value: String) {
+        userInfo = userInfo.copy(email = value)
+    }
+
+    fun onPasswordChange(value: String) {
+        userInfo = userInfo.copy(password = value)
+    }
+
+
+
+    fun login(onSuccess: (user: UserInfo) -> Unit){
         viewModelScope.launch {
             val db = DatabaseProvider.getDatabase(getApplication())
+            val savedUser = db.userDao.getUserByEmail(userInfo.email)
+
+            when {
+                savedUser == null -> loginError = "no Account found using that email"
+                savedUser.password != userInfo.password -> loginError = "Incorrect Password"
+                else -> {
+                    loginError = null
+                    onSuccess(savedUser)
+                }
+            }
 
 
         }

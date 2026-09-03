@@ -10,9 +10,16 @@ import kotlinx.coroutines.flow.Flow
 interface userDao {
     @Upsert
     suspend fun upsertUser(userInfo: UserInfo)
-    @Delete
-    suspend fun deleteUser(userInfo: UserInfo)
 
     @Query("SELECT * FROM user")
     fun getAllUserInfo(): Flow<List<UserInfo>>
+
+    @Query("SELECT * FROM user WHERE email = :email LIMIT 1")
+    suspend fun getUserByEmail(email: String): UserInfo?
+
+
+    @Query("SELECT * FROM user WHERE id = :id LIMIT 1")
+    suspend fun getUserById(id: Int): UserInfo?
+
+
 }
