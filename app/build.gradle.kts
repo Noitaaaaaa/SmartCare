@@ -42,7 +42,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.10.0")
     implementation("androidx.room:room-runtime:2.8.4")
     implementation("androidx.room:room-ktx:2.8.4")
-    implementation("androidx.room:room-livedata-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.9.4")
     implementation(libs.androidx.lifecycle.livedata.ktx)
     ksp("androidx.room:room-compiler:2.8.4")
     implementation("androidx.core:core-splashscreen:1.2.0")

@@ -12,10 +12,5 @@ class viewModel(private val repository: Repository): ViewModel() {
         repository.upsertUser(userInfo)
         }
     }
-    fun delete(userInfo: UserInfo){
-            viewModelScope.launch{
-                repository.deleteUser(userInfo)
-            }
-}
 }
 
